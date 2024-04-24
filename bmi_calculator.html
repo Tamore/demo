@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BMI Calculator</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-image: url('bmi.jpg'); 
+        background-size: cover;
+        background-position: center;
+    }
+    .container {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+    input[type="number"] {
+        width: 60px;
+        padding: 5px;
+        margin: 0 10px;
+        text-align: center;
+    }
+    button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    #result {
+        margin-top: 20px;
+        font-weight: bold;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>BMI Calculator</h2>
+    <div>
+        <label for="weight">Weight (kg):</label>
+        <input type="number" id="weight">
+    </div> <br>
+    <div>
+        <label for="height">Height (cm):</label>
+        <input type="number" id="height">
+    </div> <br>
+    <button onclick="calculateBMI()">Calculate</button>
+    <div id="result"></div> <br>
+</div>
+
+<script>
+    function calculateBMI() 
+	{
+	
+        var weight = parseFloat(document.getElementById('weight').value);
+        var height = parseFloat(document.getElementById('height').value) / 100; // Convert height to meters
+
+        if (isNaN(weight) || isNaN(height) || weight <= 0 || height <= 0)   // Check if weight or height is not a number or less than or equal to zero
+		{
+            document.getElementById('result').innerText = "Please enter valid weight and height.";  // Display an error message if weight or height is invalid
+            return;  // Exit the function early if input is invalid
+
+        }
+
+        var bmi = weight / (height * height); //BMI formula
+        var bmiResult = "Your BMI is " + bmi.toFixed(2) + ". ";
+
+        if (bmi < 18.5) 
+			{
+            bmiResult += "You are underweight.";
+			} 
+			else if (bmi >= 18.5 && bmi < 25) 
+			{
+            bmiResult += "You have a normal weight.";
+			} 
+			else if (bmi >= 25 && bmi < 30) 
+			{
+            bmiResult += "You are overweight.";
+			} 
+			else 
+			{
+            bmiResult += "You are obese.";
+			}
+
+        document.getElementById('result').innerText = bmiResult; //Dispaly Result
+    }
+</script>
+
+</body>
+</html>
